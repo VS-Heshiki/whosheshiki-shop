@@ -12,6 +12,5 @@ export const Header = styled('header', {
     padding: '0 2rem',
     width: '100%',
     maxWidth: 1180,
-    margin: '0 auto',
-    marginBottom: '2rem'
+    margin: '2rem auto'
 })
