@@ -30,7 +30,7 @@ export default function Home ({ products }: GetSSProps) {
         <HomeContainer ref={ sliderRef } className='keen-slider'>
             { products.map(product => {
                 return (
-                    <Link key={ product.id } href={ `/products/${product.id}` }>
+                    <Link legacyBehavior key={ product.id } href={ `/products/${product.id}` }>
                         <Catalog className='keen-slider__slide'>
                             <Image src={ product.imageUrl } alt='' width={ 580 } height={ 580 } />
                             <footer>
