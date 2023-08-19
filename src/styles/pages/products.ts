@@ -4,7 +4,7 @@ export const ProductContainer = styled('main', {
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
     alignItems: 'stretch',
-    gap: '4.5rem',
+    gap: '3rem',
 
     maxWidth: 1180,
     margin: '0 auto'
@@ -12,15 +12,15 @@ export const ProductContainer = styled('main', {
 
 export const ImageContainer = styled('div', {
     width: '100%',
-    maxWidth: 576,
-    height: 656,
+    maxWidth: 584,
+    height: 'calc(656px - 0.5rem)',
     padding: '0.25rem',
     background: 'linear-gradient(128deg, #7254cc 0%, #393d40 100%)',
     borderRadius: 8,
 
     display: 'flex',
     justifyContent: 'center',
-    alignContent: 'center',
+    alignItems: 'center',
 
     img: {
         objectFit: 'cover'
