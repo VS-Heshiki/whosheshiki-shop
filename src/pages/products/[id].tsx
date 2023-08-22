@@ -2,6 +2,7 @@ import { stripe } from '@/lib/stripe'
 import { DescriptionContainer, ImageContainer, ProductContainer } from '@/styles/pages/products'
 import axios from 'axios'
 import { GetStaticPaths, GetStaticProps } from 'next'
+import Head from 'next/head'
 import Image from 'next/image'
 import { ShoppingBag } from 'phosphor-react'
 import Stripe from 'stripe'
@@ -33,20 +34,25 @@ export default function Products ({ product }: ProductProps) {
     }
 
     return (
-        <ProductContainer>
-            <ImageContainer>
-                <Image src={ product.imageUrl } width={ 580 } height={ 580 } alt='' />
-            </ImageContainer>
-            <DescriptionContainer>
-                <strong>{ product.name }</strong>
-                <span>{ product.price }</span>
-                <p>{ product.description }</p>
-                <button onClick={ handleBuyProduct }>
-                    Shop!
-                    <ShoppingBag size={ 24 } />
-                </button>
-            </DescriptionContainer>
-        </ProductContainer>
+        <>
+            <Head>
+                <title>{ product.name } | WhosHeshiki Shop</title>
+            </Head>
+            <ProductContainer>
+                <ImageContainer>
+                    <Image src={ product.imageUrl } width={ 580 } height={ 580 } alt='' />
+                </ImageContainer>
+                <DescriptionContainer>
+                    <strong>{ product.name }</strong>
+                    <span>{ product.price }</span>
+                    <p>{ product.description }</p>
+                    <button onClick={ handleBuyProduct }>
+                        Shop!
+                        <ShoppingBag size={ 24 } />
+                    </button>
+                </DescriptionContainer>
+            </ProductContainer>
+        </>
     )
 }
 

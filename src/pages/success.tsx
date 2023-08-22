@@ -1,6 +1,7 @@
 import { stripe } from '@/lib/stripe'
 import { SuccessContainer, ImageContainer } from '@/styles/pages/success'
 import { GetServerSideProps } from 'next'
+import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import Stripe from 'stripe'
@@ -15,28 +16,34 @@ export type ProductProps = {
 
 export default function Success ({ customerName, product }: ProductProps) {
     return (
-        <SuccessContainer>
+        <>
+            <Head>
+                <title>Success | WhosHeshiki Shop</title>
 
-            <h1>Completed Order! 🎉</h1>
+                <meta name='robots' content='noindex' />
+            </Head>
+            <SuccessContainer>
 
-            <ImageContainer>
-                <Image src={ product.itemIMG } width={ 130 } height={ 110 } alt='' />
-            </ImageContainer>
+                <h1>Completed Order! 🎉</h1>
 
-            <p>
-                Nice <strong>{ customerName } 😎</strong>! Your <strong>{ product.itemName }</strong> is already in separation!
-            </p>
+                <ImageContainer>
+                    <Image src={ product.itemIMG } width={ 130 } height={ 110 } alt='' />
+                </ImageContainer>
 
-            <Link href="/">
-                Back to catalog
-            </Link>
-        </SuccessContainer>
+                <p>
+                    Nice <strong>{ customerName } 😎</strong>! Your <strong>{ product.itemName }</strong> is already in separation!
+                </p>
+
+                <Link href="/">
+                    Back to catalog
+                </Link>
+            </SuccessContainer>
+        </>
     )
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     const sessionId = String(query.session_id)
-
 
     const session = await stripe.checkout.sessions.retrieve(sessionId, {
         expand: ['line_items', 'line_items.data.price.product']
