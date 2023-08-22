@@ -8,12 +8,13 @@ export const HomeContainer = styled('main', {
     minHeight: 656
 })
 
-export const Catalog = styled('a', {
+export const Catalog = styled('div', {
     background: 'linear-gradient(128deg, #7254cc 0%, #393d40 100%)',
     borderRadius: 8,
     position: 'relative',
     overflow: 'hidden',
     color: '$gray300',
+    cursor: 'pointer',
 
     display: 'flex',
     justifyContent: 'center',

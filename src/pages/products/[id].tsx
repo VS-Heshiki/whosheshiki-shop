@@ -1,9 +1,9 @@
 import { stripe } from '@/lib/stripe'
 import { DescriptionContainer, ImageContainer, ProductContainer } from '@/styles/pages/products'
+import axios from 'axios'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
-import { ShoppingCartSimple } from 'phosphor-react'
+import { ShoppingBag } from 'phosphor-react'
 import Stripe from 'stripe'
 
 type ProductProps = {
@@ -13,10 +13,25 @@ type ProductProps = {
         imageUrl: string
         price: string
         description: string
+        defaultPriceId: string
     }
 }
 
 export default function Products ({ product }: ProductProps) {
+
+    async function handleBuyProduct () {
+        try {
+            const response = await axios.post('/api/checkout', {
+                priceId: product.defaultPriceId
+            })
+
+            const { checkoutUrl } = response.data
+            window.location.href = checkoutUrl
+        } catch (err) {
+            alert(err)
+        }
+    }
+
     return (
         <ProductContainer>
             <ImageContainer>
@@ -26,9 +41,9 @@ export default function Products ({ product }: ProductProps) {
                 <strong>{ product.name }</strong>
                 <span>{ product.price }</span>
                 <p>{ product.description }</p>
-                <button>
-                    'Add to cart'
-                    <ShoppingCartSimple size={ 24 } />
+                <button onClick={ handleBuyProduct }>
+                    Shop!
+                    <ShoppingBag size={ 24 } />
                 </button>
             </DescriptionContainer>
         </ProductContainer>
@@ -63,7 +78,8 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ para
                     style: 'currency',
                     currency: 'USD'
                 }).format(price.unit_amount / 100),
-                description: product.description
+                description: product.description,
+                defaultPriceId: price.id
             }
         },
         revalidate: 60 * 60 * 1 // 1hr
