@@ -19,14 +19,24 @@ export const SuccessContainer = styled('main', {
         textAlign: 'center',
         marginBottom: '5rem',
         lineHeight: 1.6,
-        maxWidth: 560
+        maxWidth: 560,
+
+        strong: {
+            color: '$purple300'
+        }
     },
 
     a: {
         display: 'block',
         textDecoration: 'none',
         fontSize: '$lg',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: '$purple300',
+
+        '&:hover': {
+            color: '$purple500',
+            transition: 'color 0.3s'
+        }
     }
 })
 
